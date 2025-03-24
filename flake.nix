@@ -115,10 +115,13 @@
       # This is for plugins that will load at startup without using packadd:
       startupPlugins = {
         gitPlugins = with pkgs.neovimPlugins; [];
-        general = with pkgs.vimPlugins; [
-          nvim-treesitter.withAllGrammars
-          todo-comments-nvim
-        ];
+        general = with pkgs.vimPlugins; {
+          always = [
+            lze
+            lzextras
+            plenary-nvim
+          ];
+        };
       };
 
       # not loaded automatically at startup.
@@ -132,6 +135,12 @@
             telescope-ui-select-nvim
             telescope-undo-nvim
             telescope-file-browser-nvim
+          ];
+          treesitter = with pkgs.vimPlugins; [
+            nvim-treesitter.withAllGrammars
+          ];
+          extra = with pkgs.vimPlugins; [
+            todo-comments-nvim
           ];
         };
       };
