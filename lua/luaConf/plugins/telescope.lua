@@ -7,24 +7,22 @@ return {
 
     keys = {
       -- See `:help telescope.builtin`
-      local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-      vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-      vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-      vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-      vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-      vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-      vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-      vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-      vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-      vim.keymap.set("n", "<leader>st", builtin.colorscheme, { desc = "[S]earch Color [T]hemes" })
+      { "<leader>sh", function() require("telescope.builtin").help_tags() end, mode = { "n" }, desc = "[S]earch [H]elp" },
+      { "<leader>sk", function() require("telescope.builtin").keymaps() end, mode = { "n" }, desc = "[S]earch [K]eymaps" },
+      { "<leader>sf", function() require("telescope.builtin").find_files() end, mode = { "n" }, desc = "[S]earch [F]iles" },
+      { "<leader>ss", function() require("telescope.builtin").builtin() end, mode = { "n" }, desc = "[S]earch [S]elect Telescope" },
+      { "<leader>sw", function() require("telescope.builtin").grep_string() end, mode = { "n" }, desc = "[S]earch current [W]ord" },
+      { "<leader>sg", function() require("telescope.builtin").live_grep() end, mode = { "n" }, desc = "[S]earch by [G]rep" },
+      { "<leader>sd", function() require("telescope.builtin").diagnostics() end, mode = { "n" }, desc = "[S]earch [D]iagnostics" },
+      { "<leader>sr", function() require("telescope.builtin").resume() end, mode = { "n" }, desc = "[S]earch [R]esume" },
+      { "<leader>s.", function() require("telescope.builtin").oldfiles() end, mode = { "n" }, desc = '[S]earch Recent Files ("." for repeat)' },
+      { "<leader><leader>", function() require("telescope.builtin").buffers() end, mode = { "n" }, desc = "[ ] Find existing buffers" },
+      { "<leader>st", function() require("telescope.builtin").colorscheme() end, mode = { "n" }, desc = "[S]earch Color [T]hemes" },
 
       -- File browser setup
-      local fb = require("telescope").extensions.file_browser
-      vim.keymap.set("n", "<leader>fb", function()
-      fb.file_browser({ path = "%:p:h" })
-      end, { desc = "Telescope [F]ile [B]rowser" })
+      { "<leader>fb", function()
+      require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" })
+      end, mode = { 'n' }, desc = "Telescope [F]ile [B]rowser" },
     },
 
     load = function (name)
@@ -33,21 +31,21 @@ return {
       vim.cmd.packadd("telescope-ui-select.nvim")
     end,
 
-    -- NOTE: not sure if i need it
-    after = function (plugin)
-    require("telescope").setup({
-      extensions = {
-        ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
-          },
-        file_browser = {
-       require("telescope.themes").get_dropdown(),
-       hijack_netrw = true,
+    after = function(plugin)
+      require("telescope").setup({
+        extensions = {
+          ['ui-select'] = {
+              require('telescope.themes').get_dropdown(),
+            },
+          file_browser = {
+         require("telescope.themes").get_dropdown(),
+         hijack_netrw = true,
+          }
         }
-      }
-    })
-    pcall(require("telescope").load_extension, "file_browser")
-    pcall(require('telescope').load_extension, 'fzf')
-    pcall(require('telescope').load_extension, 'ui-select')
+      })
+      pcall(require("telescope").load_extension, "file_browser")
+      pcall(require('telescope').load_extension, 'fzf')
+      pcall(require('telescope').load_extension, 'ui-select')
+    end,
   }
 }
