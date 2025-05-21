@@ -25,6 +25,11 @@ local for_cat = {
     end,
 }
 
+local catUtils = require('nixCatsUtils')
+if (catUtils.isNixCats and nixCats('lspDebugMode')) then
+  vim.lsp.set_log_level("debug")
+end
+
 -- NOTE: register an extra lze handler with the spec_field 'for_cat'
 -- that makes enabling an lze spec for a category slightly nicer
 require("lze").register_handlers(for_cat)
@@ -38,3 +43,5 @@ require("lze").register_handlers(require('lzextras').lsp)
 -- NOTE: Activates plugins folder
 require("luaConf.plugins")
 
+-- NOTE: Activates LSPs
+require("luaConf.LSP")

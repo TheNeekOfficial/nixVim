@@ -8,9 +8,12 @@
 - telescope
     - telescope undo
     - telescope FB
+        - maybe replace w/ yazi and oil?
     - Telescope zoxide
         - **ONLY** if I can ensure zoxide is installed on the machine
             - Potentially 2 different options thing thats mentioned in the tutorial
+- Which Key
+- gitsigns
 
 # Look at
 - lz
@@ -23,7 +26,6 @@
 ## Likely
 - mini
 - discord
-- gitsigns
 - lualine
 
 ## Maybe
@@ -31,7 +33,6 @@
 - harpoon
 - refactoring
 - obsidian
-- Which Key
 
 ## Likely not
 - dooing

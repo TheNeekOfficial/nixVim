@@ -106,10 +106,10 @@
       # this includes LSPs
       lspsAndRuntimeDeps = {
         general = with pkgs; [
-          nixd
-          python312Packages.python-lsp-server
-          lua-language-server
         ];
+        neonixdev = {
+          inherit (pkgs) nix-doc lua-language-server stylua nixd;
+        };
       };
 
       # This is for plugins that will load at startup without using packadd:
@@ -128,6 +128,9 @@
       # use with packadd and an autocommand in config to achieve lazy loading
       optionalPlugins = {
         gitPlugins = with pkgs.neovimPlugins; [];
+        neonixdev = with pkgs.vimPlugins; [
+          lazydev-nvim
+        ];
         general = {
           telescope = with pkgs.vimPlugins; [
             telescope-nvim
@@ -138,6 +141,10 @@
           ];
           treesitter = with pkgs.vimPlugins; [
             nvim-treesitter.withAllGrammars
+          ];
+          always = with pkgs.vimPlugins; [
+            nvim-lspconfig
+            nvim-surround
           ];
           extra = with pkgs.vimPlugins; [
             todo-comments-nvim
@@ -212,6 +219,8 @@
           general = true;
           gitPlugins = true;
           customPlugins = true;
+          format = true;
+          neonixdev = true;
           test = true;
           example = {
             youCan = "add more than just booleans";
